@@ -45,9 +45,6 @@ class TestingEntity extends BaseEntity {
     public number?: number = 0;
 
     @Column()
-    public bigInt?: BigInt = BigInt(0);
-
-    @Column()
     public date?: Date = new Date();
 
     @Column({parseDate: true})

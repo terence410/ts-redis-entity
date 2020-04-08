@@ -22,9 +22,6 @@ class TestingEntity extends BaseEntity {
     public number?: number = 0;
 
     @Column()
-    public bigInt?: BigInt = BigInt(0);
-
-    @Column()
     public date?: Date = new Date();
 
     @Column({parseDate: true})
@@ -61,7 +58,7 @@ async function checkPromiseSuccess(promiseCallback: Promise<any>) {
         await promiseCallback;
         return true;
     } catch (err) {
-        console.log(`errorCode: ${err.errorCode}, ${err.message}`);
+        // console.log(`errorCode: ${err.errorCode}, ${err.message}`);
     }
 }
 
@@ -101,7 +98,6 @@ describe("general", () => {
         entity.number = 1;
         entity.boolean = true;
         entity.date = new Date();
-        entity.bigInt = BigInt(10);
         entity.array = [1, 2, 3];
         entity.object = {a: {b: {c: 1}}};
         entity.nullableString = null;
@@ -120,7 +116,6 @@ describe("general", () => {
         entity.number = Number.NaN;
         entity.boolean = undefined;
         entity.date = new Date("invalid");
-        entity.bigInt = undefined;
         entity.array = undefined;
         entity.object = {a: {b: {c: null, d: new Date()}}};
         entity.nullableString = null;
@@ -275,9 +270,6 @@ describe("parser", () => {
 
             // numbers
             1, 0, -1, 0.3333333333333333, Number.MAX_VALUE, Number.NaN, Number.NEGATIVE_INFINITY,
-
-            // big int
-            BigInt(1), BigInt("0b11111111111111111111111111111111111111111111111111111"), BigInt("0x1fffffffffffff"),
 
             // boolean
             true, false,
