@@ -45,6 +45,13 @@ export class BaseEntity {
         return allKeys.map(x => x.replace(`${namespace}:`, ""));
     }
 
+    public static async findAll<T extends typeof BaseEntity>(this: T, prefix: string = ""): Promise<Array<InstanceType<T>>> {
+        const ids = await this.findAllIds(prefix);
+        const promises = ids.map(id => this.find(id));
+        const entities = await Promise.all(promises);
+        return entities.filter(x => x) as Array<InstanceType<T>>;
+    }
+
     public static async find<T extends typeof BaseEntity>(this: T, id: string): Promise<InstanceType<T> | undefined> {
         const redis = tsRedisEntity.getRedis(this);
         const storageKey = tsRedisEntity.getStorageKey(this, id);

@@ -67,12 +67,9 @@ before(async () => {
 });
 
 after(async () => {
-    const ids = await TestingEntity.findAllIds();
-    for (const id of ids) {
-        const entity = await TestingEntity.find(id);
-        if (entity) {
-            await entity.forceDelete();
-        }
+    const entities = await TestingEntity.findAll();
+    for (const entity of entities) {
+        await entity.forceDelete();
     }
 });
 
@@ -175,6 +172,9 @@ describe("general", () => {
 
         const allIds = await TestingEntity.findAllIds("findAllIds-");
         assert.deepEqual(allIds.sort(), ids.sort());
+
+        const allEntities = await TestingEntity.findAll("findAllIds-");
+        assert.deepEqual(allEntities.map(x => x.id).sort(), ids.sort());
     });
 
     it("scanAllIds", async () => {
