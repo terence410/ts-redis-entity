@@ -9,8 +9,9 @@
     "url": "git://github.com/terence410/ts-redis-entity.git"
   },
   "main": "build/index.js",
+  "types": "build/index.d.ts",
   "engines": {
-    "node": ">=6.0"
+    "node": ">=8.0"
   },
   "scripts": {
     "test": "mocha --exit --timeout 30000 -r ts-node/register tests/*.ts",
