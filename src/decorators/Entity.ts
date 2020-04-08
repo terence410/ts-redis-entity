@@ -2,9 +2,10 @@ import {DecoratorError} from "../errors/DecoratorError";
 import {tsRedisEntity} from "../tsRedisEntity";
 import {IEntityMeta} from "../types";
 
-export function Entity(entityMeta: IEntityMeta) {
+export function Entity(entityMeta: Partial<IEntityMeta>) {
     return (target: object) => {
-        if (!entityMeta.namespace || /:/.test(entityMeta.namespace)) {
+        const newEntityMeta: IEntityMeta = Object.assign({namespace: (target as any).name, connection: "default"}, entityMeta);
+        if (/:/.test(newEntityMeta.namespace)) {
             throw new DecoratorError(`(${(target as any).name}) namespace must not be empty or contains ":".`);
         }
 
@@ -13,6 +14,6 @@ export function Entity(entityMeta: IEntityMeta) {
             throw new DecoratorError(`(${(target as any).name}) No id exist for this entity.`);
         }
 
-        tsRedisEntity.addHashEntity(target, entityMeta);
+        tsRedisEntity.addHashEntity(target, newEntityMeta);
     };
 }

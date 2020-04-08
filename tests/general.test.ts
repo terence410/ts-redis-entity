@@ -9,8 +9,8 @@ import {normalizeValue, parseNormalizedValue} from "../src/parser";
 import {tsRedisEntity} from "../src/tsRedisEntity";
 import {timeout} from "../src/utils";
 
-const namespace = "Testing";
-@Entity({namespace, connection: "default"})
+const namespace = "TestingEntity";
+@Entity({connection: "default"})
 class TestingEntity extends BaseEntity {
     @Column()
     public id: string = "";
