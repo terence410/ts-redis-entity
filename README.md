@@ -29,14 +29,19 @@ class QuickStart extends BaseEntity {
     public id: string = "";
 
     @Column()
-    public value: string = "";
+    public number: number = 10;
 }
 
 async function quickStartExamples() {
     await tsRedisEntity.addConnection("default", { port: 6380, host: "127.0.0.1" });
     const entity = QuickStart.new({id: "1", number: 10});
-    await entity.create();
+    await entity.create({expire: 60}); // expire in 60 seconds
     const foundEntity = await QuickStart.find("1");
+    if (foundEntity) {
+        const getValues = foundEntity.getValues();
+        foundEntity.setValues({number: 20});
+        await foundEntity.update({expire: new Date(new Date().getTime() + 60 * 1000)});
+    }
 }
 
 ```

@@ -66,6 +66,16 @@ before(async () => {
     await tsRedisEntity.addConnection("default", {});
 });
 
+after(async () => {
+    const ids = await TestingEntity.findAllIds();
+    for (const id of ids) {
+        const entity = await TestingEntity.find(id);
+        if (entity) {
+            await entity.forceDelete();
+        }
+    }
+});
+
 describe("general", () => {
     it("basic operation", async () => {
         const id = "basic";
