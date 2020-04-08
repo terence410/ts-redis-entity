@@ -1,0 +1,41 @@
+{
+  "author": "Terence",
+  "name": "ts-redis-entity",
+  "description": "A package that helps you to save a simple entity structure to redis. With various features like expire, update with conditions.",
+  "version": "0.0.1",
+  "homepage": "https://github.com/terence410/ts-redis-entity",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/terence410/ts-redis-entity.git"
+  },
+  "main": "build/index.js",
+  "engines": {
+    "node": ">=6.0"
+  },
+  "scripts": {
+    "test": "mocha --exit --timeout 30000 -r ts-node/register tests/*.ts",
+    "test:coverage": "nyc --reporter=json --reporter=text mocha --exit --timeout 30000 -r ts-node/register tests/*.ts",
+    "npm:patch": "npm version patch",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@types/ioredis": "^4.14.9",
+    "ioredis": "^4.16.1",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.3",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.12.7",
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "mocha": "^7.1.1",
+    "ts-node": "^8.8.2",
+    "typescript": "^3.7.2",
+    "nyc": "^15.0.1"
+  },
+  "keywords": [
+    "redis"
+  ],
+  "license": "MIT License"
+}
