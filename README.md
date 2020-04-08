@@ -1,5 +1,19 @@
 # ts-redis-entity
 
+[![NPM version][npm-image]][npm-url]
+[![Test][github-action-image]][github-action-url]
+[![Test coverage][codecov-image]][codecov-url]
+[![David deps][david-image]][david-url]
+
+[npm-image]: https://img.shields.io/npm/v/ts-redis-entity.svg
+[npm-url]: https://npmjs.org/package/ts-redis-entity
+[github-action-image]: https://github.com/terence410/ts-redis-entity/workflows/Testing/badge.svg
+[github-action-url]: https://github.com/terence410/ts-redis-entity/actions
+[codecov-image]: https://img.shields.io/codecov/c/github/terence410/ts-redis-entity.svg?style=flat-square
+[codecov-url]: https://codecov.io/gh/terence410/ts-redis-entity
+[david-image]: https://img.shields.io/david/terence410/ts-redis-entity.svg?style=flat-square
+[david-url]: https://david-dm.org/terence410/ts-redis-entity
+
 A package that helps you to save a simple entity structure to redis. With various features like expire, update with conditions.
 
 The entity structure is saved using [hmset](https://redis.io/commands/hmset).
