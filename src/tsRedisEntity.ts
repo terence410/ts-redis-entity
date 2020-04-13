@@ -64,6 +64,7 @@ class TsRedisEntity {
 
         const redis = new IORedis(options);
         await this._registerLua(redis);
+        await redis.info(); // this make sure the redis can be connected via add connection
         this._redisList.set(name, redis);
     }
 
