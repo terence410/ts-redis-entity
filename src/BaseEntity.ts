@@ -25,6 +25,10 @@ export class BaseEntity {
             eventEmitter.emit("end");
         });
 
+        stream.on("error", (err) => {
+            eventEmitter.emit("error", err);
+        });
+
         return eventEmitter;
     }
 
@@ -41,7 +45,11 @@ export class BaseEntity {
             allKeys = [...allKeys, ...keys];
         });
 
-        await new Promise(resolve => stream.on("end", resolve));
+        // we also capture error
+        await new Promise((resolve, reject) => {
+            stream.on("end", resolve);
+            stream.on("error", reject);
+        });
         return allKeys.map(x => x.replace(`${namespace}:`, ""));
     }
 

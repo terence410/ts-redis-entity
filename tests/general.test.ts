@@ -63,7 +63,8 @@ async function checkPromiseSuccess(promiseCallback: Promise<any>) {
 }
 
 before(async () => {
-    await tsRedisEntity.addConnection("default", {});
+    // this redis will not retry forever
+    await tsRedisEntity.addConnection("default", {retryStrategy: (times: number) => times > 1 ? null : 1000});
 });
 
 after(async () => {
@@ -190,12 +191,13 @@ describe("general", () => {
         const results = await Promise.all(promises2);
 
         let allIds: string[] = [];
-        await new Promise(resolve => {
+        await new Promise((resolve, reject) => {
             const stream = TestingEntity.scanAllIds("scanAllIds-");
             stream.on("data", (newIds) => {
                 allIds = [...allIds, ...newIds];
             });
             stream.on("end", resolve);
+            stream.on("error", reject);
         });
         assert.deepEqual(allIds.sort(), ids.sort());
     });

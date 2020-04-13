@@ -18,4 +18,5 @@ export type IValues<T> = { [P in Exclude<keyof T, keyof BaseEntity>]: T[P] };
 export interface IScanStream {
     on(type: "data", callback: (ids: string[]) => void): void;
     on(type: "end", callback: () => void): void;
+    on(type: "error", callback: (err: Error) => void): void;
 }
