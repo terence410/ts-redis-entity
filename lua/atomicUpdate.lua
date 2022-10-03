@@ -22,7 +22,7 @@ for column, normalizedValue in pairs(conditionNormalizedValues) do
     end
 end
 
-redis.call("HMSET", storageKey, unpack(table.flattern(normalizedValues)))
+redis.call("HMSET", storageKey, unpack(table_flattern(normalizedValues)))
 
 if expireSeconds > 0 then
     redis.call("EXPIRE", storageKey, expireSeconds)

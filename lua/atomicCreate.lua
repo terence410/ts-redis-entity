@@ -8,7 +8,7 @@ if isExist == 1 then
     return error(errorCodes.alreadyExist, "entity already exist for id: " ..  id .. ".")
 end
 
-redis.call("HMSET", storageKey, unpack(table.flattern(normalizedValues)))
+redis.call("HMSET", storageKey, unpack(table_flattern(normalizedValues)))
 
 if expireSeconds > 0 then
     redis.call("EXPIRE", storageKey, expireSeconds)
